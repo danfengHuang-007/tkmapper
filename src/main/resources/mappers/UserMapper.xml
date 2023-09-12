@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.tkmapperdemo.dao.UserDAO">
+
+    <resultMap id="userMap" type="User">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="realname" property="realname"/>
+        <result column="user_img" property="userImg"/>
+        <result column="user_mobile" property="userMobile"/>
+        <result column="user_email" property="userEmail"/>
+        <result column="user_sex" property="userSex"/>
+        <result column="user_birth" property="userBirth"/>
+        <result column="user_regtime" property="userRegtime"/>
+        <result column="user_modtime" property="userModtime"/>
+        <collection property="ordersList" ofType="Orders">
+            <result column="order_id" property="orderId"/>
+            <result column="receiver_name" property="receiverName"/>
+            <result column="receiver_mobile" property="receiverMobile"/>
+            <result column="receiver_address" property="receiverAddress"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="selectByUsername" resultMap="userMap">
+        select
+            u.user_id,
+            u.username,
+            u.password,
+            u.nickname,
+            u.realname,
+            u.user_img,
+            u.user_mobile,
+            u.user_email,
+            u.user_sex,
+            u.user_birth,
+            u.user_regtime,
+            u.user_modtime,
+            o.order_id,
+               o.receiver_name,
+               o.receiver_mobile,
+               o.receiver_address
+        from users u inner join orders o
+        on u.user_id = o.user_id;
+    </select>
+
+
+</mapper>

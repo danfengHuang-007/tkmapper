@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1.0.dtd">
+<generatorConfiguration>
+    <!-- 引入数据库连接配置-->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--配置 GeneralDAO -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.qfedu.tkmapperdemo.general.GeneralDAO"/>
+        </plugin>
+
+        <!-- 配置数据库连接 -->
+        <jdbcConnection
+            driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://localhost:3306/fmmall"
+            userId="root"
+            password="admin123">
+        </jdbcConnection>
+        <!-- 配置实体类存放路径-->
+        <javaModelGenerator targetPackage="com.qfedu.tkmapperdemo.beans" targetProject="src/main/java"/>
+
+        <!-- 配置 XML 存放路径 -->
+        <sqlMapGenerator targetPackage="/" targetProject="src/main/resources/mappers"/>
+
+        <!-- 配置 DAO 存放路径 -->
+        <javaClientGenerator
+            targetPackage="com.qfedu.tkmapperdemo.dao"
+            targetProject="src/main/java"
+            type="XMLMAPPER"/>
+
+        <!-- 配置需要指定生成的数据库和表, %代表所有表 -->
+        <table tableName="%">
+            <!-- mysql 配置 -->
+<!--             <generatedKey column="id" sqlStatement="Mysql" identity="true"/> -->
+        </table>
+        <!--
+        <table tableName="tb_roles">
+            &lt; !&ndash; mysql 配置 &ndash;&gt;
+            <generateKey column="roleid" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="tb_permissions">
+            &lt; !&ndash; mysql 配置 &ndash;&gt;
+            <generateKey column="perid" sqlStatement="Mysql" identity="true"/>
+        </table>
+        -->
+    </context>
+</generatorConfiguration>
